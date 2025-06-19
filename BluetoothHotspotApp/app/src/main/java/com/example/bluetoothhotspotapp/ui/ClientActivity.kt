@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.example.bluetoothhotspotapp.BaseActivity
 import com.example.bluetoothhotspotapp.data.repository.ConnectionState
 import com.example.bluetoothhotspotapp.databinding.ActivityClientBinding
 import com.example.bluetoothhotspotapp.viewmodel.ClientViewModel
@@ -24,7 +25,7 @@ import kotlinx.coroutines.withContext
 import com.example.bluetoothhotspotapp.databinding.DialogPairedDevicesBinding // Necesario para el DialogFragment
 
 @SuppressLint("MissingPermission")
-class ClientActivity : AppCompatActivity(), PairedDevicesDialogFragment.DeviceSelectionListener {
+class ClientActivity : BaseActivity(), PairedDevicesDialogFragment.DeviceSelectionListener {
 
     private lateinit var binding: ActivityClientBinding
     private val viewModel: ClientViewModel by viewModels { ViewModelFactory(this) }

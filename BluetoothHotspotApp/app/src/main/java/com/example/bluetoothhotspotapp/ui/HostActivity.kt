@@ -12,13 +12,14 @@ import android.os.Build
 import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import com.example.bluetoothhotspotapp.BaseActivity
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
 
 
-class HostActivity : AppCompatActivity() {
+class HostActivity : BaseActivity() {
 
     private lateinit var binding: ActivityHostBinding
     private val logReceiver = object : BroadcastReceiver() {

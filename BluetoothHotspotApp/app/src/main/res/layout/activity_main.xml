@@ -41,5 +41,14 @@
         app:layout_constraintEnd_toEndOf="@+id/button_open_client"
         app:layout_constraintStart_toStartOf="@+id/button_open_client"
         app:layout_constraintTop_toBottomOf="@+id/button_open_client" />
+    <Button
+        android:id="@+id/btnToggleTheme"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Cambiar tema"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
