@@ -21,9 +21,10 @@ import com.example.bluetoothhotspotapp.viewmodel.ViewModelFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import com.example.bluetoothhotspotapp.databinding.DialogPairedDevicesBinding // Necesario para el DialogFragment
 
 @SuppressLint("MissingPermission")
-class ClientActivity : AppCompatActivity() {
+class ClientActivity : AppCompatActivity(), PairedDevicesDialogFragment.DeviceSelectionListener {
 
     private lateinit var binding: ActivityClientBinding
     private val viewModel: ClientViewModel by viewModels { ViewModelFactory(this) }
@@ -45,55 +46,38 @@ class ClientActivity : AppCompatActivity() {
             PermissionHelper.requestBluetoothPermissions(this)
         }
     }
+    override fun onDeviceSelected(device: BluetoothDevice) {
+        viewModel.connectToDevice(device)
+    }
+
     private fun setupRecyclerView() {
         binding.recyclerViewResults.adapter = searchResultAdapter
     }
 
     private fun setupListeners() {
+        // Listener para el nuevo botón de conexión
+        binding.buttonConnect.setOnClickListener {
+            showPairedDevicesDialog()
+        }
+
+        // Listener para el botón de búsqueda que está en la barra superior
         binding.buttonSearch.setOnClickListener {
-            if (viewModel.connectionState.value is ConnectionState.Connected) {
-                val query = binding.editTextSearch.text.toString()
-                if (query.isNotBlank()) {
-                    // Preparamos la UI para una nueva búsqueda
-                    binding.textViewEmpty.visibility = View.GONE
-                    binding.recyclerViewResults.visibility = View.INVISIBLE // INVISIBLE en lugar de GONE
-                    binding.progressBar.visibility = View.VISIBLE
-                    viewModel.onSearchClicked(query)
-                } else {
-                    Toast.makeText(this, "Escribe algo para buscar", Toast.LENGTH_SHORT).show()
-                }
+            val query = binding.editTextSearch.text.toString()
+            if (query.isNotBlank()) {
+                binding.textViewEmpty.visibility = View.GONE
+                binding.recyclerViewResults.visibility = View.INVISIBLE
+                binding.progressBar.visibility = View.VISIBLE
+                viewModel.onSearchClicked(query)
             } else {
-                showPairedDevicesDialog()
+                Toast.makeText(this, "Escribe algo para buscar", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
     private fun showPairedDevicesDialog() {
-        if (bluetoothAdapter == null || !bluetoothAdapter!!.isEnabled) {
-            Toast.makeText(this, "Por favor, activa el Bluetooth", Toast.LENGTH_LONG).show()
-            return
-        }
-
-        val pairedDevices: Set<BluetoothDevice>? = bluetoothAdapter?.bondedDevices
-        val deviceList = pairedDevices?.map { "${it.name}\n${it.address}" }?.toTypedArray() ?: emptyArray()
-
-        if (deviceList.isEmpty()) {
-            Toast.makeText(this, "No hay dispositivos emparejados. Empareja el Host desde los Ajustes de Bluetooth.", Toast.LENGTH_LONG).show()
-            return
-        }
-
-        AlertDialog.Builder(this)
-            .setTitle("Selecciona un Dispositivo Host")
-            .setItems(deviceList) { dialog, which ->
-                val selectedDevice = pairedDevices?.elementAt(which)
-                selectedDevice?.let {
-                    viewModel.connectToDevice(it)
-                }
-                dialog.dismiss()
-            }
-            .setNegativeButton("Cancelar", null)
-            .show()
+        PairedDevicesDialogFragment().show(supportFragmentManager, "PairedDevicesDialog")
     }
+
     private fun observeViewModel() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -132,27 +116,21 @@ class ClientActivity : AppCompatActivity() {
         when (state) {
             is ConnectionState.Connected -> {
                 binding.progressBar.visibility = View.GONE
-                binding.buttonSearch.isEnabled = true
-                binding.buttonSearch.text = "Buscar"
+                binding.groupSearchBar.visibility = View.VISIBLE // Muestra la barra de búsqueda
+                binding.buttonConnect.visibility = View.GONE    // Oculta el botón de conectar
                 supportActionBar?.subtitle = "Conectado a Host"
             }
             is ConnectionState.Connecting -> {
                 binding.progressBar.visibility = View.VISIBLE
-                binding.buttonSearch.isEnabled = false
+                binding.groupSearchBar.visibility = View.GONE
+                binding.buttonConnect.visibility = View.GONE
                 supportActionBar?.subtitle = "Conectando..."
             }
-            is ConnectionState.Error -> {
+            is ConnectionState.Error, is ConnectionState.Disconnected -> {
                 binding.progressBar.visibility = View.GONE
-                binding.buttonSearch.isEnabled = true
-                binding.buttonSearch.text = "Conectar"
-                supportActionBar?.subtitle = "Error de conexión"
-                Toast.makeText(this, state.message, Toast.LENGTH_SHORT).show()
-            }
-            is ConnectionState.Disconnected -> {
-                binding.progressBar.visibility = View.GONE
-                binding.buttonSearch.isEnabled = true
-                binding.buttonSearch.text = "Conectar"
-                supportActionBar?.subtitle = "Desconectado"
+                binding.groupSearchBar.visibility = View.GONE       // Oculta la barra de búsqueda
+                binding.buttonConnect.visibility = View.VISIBLE     // Muestra el botón de conectar
+                supportActionBar?.subtitle = if (state is ConnectionState.Error) "Error de conexión" else "Desconectado"
             }
         }
     }
