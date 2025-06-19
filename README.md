@@ -21,18 +21,17 @@ Aquí puedes ver una demostración rápida de cómo funciona la aplicación, mos
   <tr>
     <td align="center"><strong>1. Menú Principal</strong></td>
     <td align="center"><strong>2. Pantalla del Host</strong></td>
-    <td align="center"><strong>3. Notificación del Host</strong></td>
   </tr>
   <tr>
     <td><img src="images/sc1.jpg" alt="Menú Principal" width="200"/></td>
     <td><img src="images/sc2.jpg" alt="Pantalla del Host" width="200"/></td>
-    <td><img src="images/sc_notificacion.png" alt="Notificación del servicio del Host" width="200"/></td>
+
   </tr>
   
   <tr>
-    <td align="center"><strong>4. Cliente (Listo para Conectar)</strong></td>
-    <td align="center"><strong>5. Diálogo de Dispositivos</strong></td>
-    <td align="center"><strong>6. Cliente (Conectado)</strong></td>
+    <td align="center"><strong>3. Cliente (Listo para Conectar)</strong></td>
+    <td align="center"><strong>4. Diálogo de Dispositivos</strong></td>
+    <td align="center"><strong>5. Cliente (Conectado)</strong></td>
   </tr>
   <tr>
     <td><img src="images/sc3.jpg" alt="Pantalla de cliente para conectar con host" width="200"/></td>
@@ -40,14 +39,7 @@ Aquí puedes ver una demostración rápida de cómo funciona la aplicación, mos
     <td><img src="images/sc5.jpg" alt="Pantalla de cliente conectado" width="200"/></td>
   </tr>
 
-  <tr>
-    <td align="center"><strong>7. Cliente con Resultados</strong></td>
-    <td align="center"><strong>8. Cliente Sin Resultados</strong></td>
-    <td>&nbsp;</td> </tr>
-  <tr>
-    <td><img src="images/sc_resultados.png" alt="Cliente con resultados de búsqueda" width="200"/></td>
-    <td><img src="images/sc_vacio.png" alt="Cliente sin resultados" width="200"/></td>
-    <td>&nbsp;</td> </tr>
+
 </table>
 
 ---
