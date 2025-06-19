@@ -15,29 +15,39 @@ Aquí puedes ver una demostración rápida de cómo funciona la aplicación, mos
 
 ###  Screenshots de las Activities
 
+### 📸 Screenshots
+
 <table>
   <tr>
-    <td align="center"><strong>Menú Principal</strong></td>
-    <td align="center"><strong>Pantalla del Host</strong></td>
-    <td align="center"><strong>Pantalla del Cliente (Conectando)</strong></td>
+    <td align="center"><strong>1. Menú Principal</strong></td>
+    <td align="center"><strong>2. Pantalla del Host</strong></td>
+    <td align="center"><strong>3. Notificación del Host</strong></td>
   </tr>
   <tr>
     <td><img src="images/sc1.jpg" alt="Menú Principal" width="200"/></td>
     <td><img src="images/sc2.jpg" alt="Pantalla del Host" width="200"/></td>
+    <td><img src="images/sc_notificacion.png" alt="Notificación del servicio del Host" width="200"/></td>
+  </tr>
+  
+  <tr>
+    <td align="center"><strong>4. Cliente (Listo para Conectar)</strong></td>
+    <td align="center"><strong>5. Diálogo de Dispositivos</strong></td>
+    <td align="center"><strong>6. Cliente (Conectado)</strong></td>
+  </tr>
+  <tr>
     <td><img src="images/sc3.jpg" alt="Pantalla de cliente para conectar con host" width="200"/></td>
     <td><img src="images/sc4.jpg" alt="Dialog de dispositivos" width="200"/></td>
     <td><img src="images/sc5.jpg" alt="Pantalla de cliente conectado" width="200"/></td>
   </tr>
+
   <tr>
-    <td align="center"><strong>Cliente (Resultados)</strong></td>
-    <td align="center"><strong>Cliente (Sin Resultados)</strong></td>
-    <td align="center"><strong>Notificación del Servicio Host</strong></td>
-  </tr>
+    <td align="center"><strong>7. Cliente con Resultados</strong></td>
+    <td align="center"><strong>8. Cliente Sin Resultados</strong></td>
+    <td>&nbsp;</td> </tr>
   <tr>
-    <td><img src="URL_DE_TU_IMAGEN_CLIENTE_RESULTADOS.png" alt="Cliente con resultados de búsqueda" width="200"/></td>
-    <td><img src="URL_DE_TU_IMAGEN_CLIENTE_VACIO.png" alt="Cliente sin resultados" width="200"/></td>
-    <td><img src="URL_DE_TU_IMAGEN_NOTIFICACION.png" alt="Notificación del servicio del Host" width="200"/></td>
-  </tr>
+    <td><img src="images/sc_resultados.png" alt="Cliente con resultados de búsqueda" width="200"/></td>
+    <td><img src="images/sc_vacio.png" alt="Cliente sin resultados" width="200"/></td>
+    <td>&nbsp;</td> </tr>
 </table>
 
 ---
